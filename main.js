@@ -15,15 +15,16 @@ filter.addEventListener('keyup', filterItems);
 function addItem(e){
   e.preventDefault();
 
-  // Get input value
+  // Get input values
   var newItem = document.getElementById('item').value;
+  var newDescription = document.getElementById('description').value;
 
   // Create new li element
   var li = document.createElement('li');
   // Add class
   li.className = 'list-group-item';
-  // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
+  // Add text node with input values
+  li.appendChild(document.createTextNode(newItem + ' ' + newDescription));
 
   // Create del button element
   var deleteBtn = document.createElement('button');
@@ -37,7 +38,6 @@ function addItem(e){
   // Append button to li
   li.appendChild(deleteBtn);
   li.appendChild(editBtn);
-
 
   // Append li to list
   itemList.appendChild(li);
@@ -54,6 +54,9 @@ function removeItem(e){
 }
 
 // Filter Items
+
+
+
 function filterItems(e){
   // convert text to lowercase
   var text = e.target.value.toLowerCase();
@@ -61,7 +64,7 @@ function filterItems(e){
   var items = itemList.getElementsByTagName('li');
   // Convert to an array
   Array.from(items).forEach(function(item){
-    var itemName = item.firstChild.textContent;
+    var itemName = item.textContent;
     if(itemName.toLowerCase().indexOf(text) != -1){
       item.style.display = 'block';
     } else {
